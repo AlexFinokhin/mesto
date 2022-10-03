@@ -1,7 +1,8 @@
 # Проект: Место
 ![image](https://user-images.githubusercontent.com/101180377/193478988-f8324382-5688-469a-bf46-c4a0760e1e6d.png)
 Мой третий проект, который использует базовый функционал JS
-## https://alexfinokhin.github.io/Mesto-project/
+## Ссылка на github pages 
+https://alexfinokhin.github.io/Mesto-project/
 ### Обзор
 ### Базовые технологии, которые использовались в проекте: БЭМ, Nested, Grid, FlexBox
 ### Применена адаптивная верстка для различных разрешений
