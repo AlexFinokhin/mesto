@@ -1,12 +1,12 @@
-let popup = document.querySelectorAll(".popup");
-let popupEditProfile = document.querySelector(".popup_form_edit");
-let profileName = document.querySelector(".profile__name");
-let profileJob = document.querySelector(".profile__job");
-let profileForm = document.querySelector(".popup__form");
-let profileNameInput = document.querySelector("#nameInput");
-let profileJobInput = document.querySelector("#jobInput");
-let editButton = document.querySelector(".profile__edit-button");
-let popupActiveClass = "popup_opened";
+const popup = document.querySelectorAll(".popup");
+const popupEditProfile = document.querySelector(".popup_form_edit");
+const profileName = document.querySelector(".profile__name");
+const profileJob = document.querySelector(".profile__job");
+const profileForm = document.querySelector(".popup__form");
+const profileNameInput = document.querySelector("#nameInput");
+const profileJobInput = document.querySelector("#jobInput");
+const editButton = document.querySelector(".profile__edit-button");
+const popupActiveClass = "popup_opened";
 
 function fillProfile() {
   profileName.textContent = profileNameInput.value;
