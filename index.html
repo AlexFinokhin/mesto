@@ -17,8 +17,8 @@
     <main class="content">
       <section class="profile">
         <div class="profile__avatar-edit">
-        <img class="profile__avatar" src="./images/AVA.png" alt="Аватар профиля">
-      </div>
+          <img class="profile__avatar" src="./images/AVA.png" alt="Аватар профиля">
+        </div>
         <div class="profile__info">
           <h1 class="profile__name">Жак-Ив Кусто</h1>
           <button class="profile__edit-button" type="button" title="Редактировать профиль"></button>
@@ -28,79 +28,72 @@
       </section>
 
       <section class="elements">
-        <div class="elements__list">
-          <figure class="element">
-            <img class="element__image" src="./images/Karach.jpg" alt="Карачаевск">
-            <figcaption class="element__info">
-              <h2 class="element__name">Карачаевск</h2>
-              <button class="element__like-button" type="button" title="Нравится"></button>
-            </figcaption>
-          </figure>
-
-          <figure class="element">
-            <img class="element__image" src="./images/Elbrus1.jpg" alt="Гора Эльбрус">
-            <figcaption class="element__info">
-              <h2 class="element__name">Гора Эльбрус</h2>
-              <button class="element__like-button" type="button" title="Нравится"></button>
-            </figcaption>
-          </figure>
-
-          <figure class="element">
-            <img class="element__image" src="./images/Domb.jpg" alt="Домбай">
-            <figcaption class="element__info">
-              <h2 class="element__name">Домбай</h2>
-              <button class="element__like-button" type="button" title="Нравится"></button>
-            </figcaption>
-          </figure>
-
-          <figure class="element">
-            <img class="element__image" src="./images/Elbrus1.jpg" alt="Гора Эльбрус">
-            <figcaption class="element__info">
-              <h2 class="element__name">Гора Эльбрус</h2>
-              <button class="element__like-button" type="button" title="Нравится"></button>
-            </figcaption>
-          </figure>
-
-          <figure class="element">
-            <img class="element__image" src="./images/Domb.jpg" alt="Домбай">
-            <figcaption class="element__info">
-              <h2 class="element__name">Домбай</h2>
-              <button class="element__like-button" type="button" title="Нравится"></button>
-            </figcaption>
-          </figure>
-
-          <figure class="element">
-            <img class="element__image" src="./images/Karach.jpg" alt="Карачаево-Черкесия">
-            <figcaption class="element__info">
-              <h2 class="element__name">Карачаево-Черкесия</h2>
-              <button class="element__like-button" type="button" title="Нравится"></button>
-            </figcaption>
-          </figure>
-
-        </div>
+        <div class="elements__list"></div>
       </section>
     </main>
 
     <footer class="footer">
       <p class="footer__copyright">&copy; 2022 Mesto Russia</p>
     </footer>
+
   </div>
 
   <div class="popup popup_form_edit">
     <div class="popup__container">
-      <form class="popup__form" name="profile-form">
+      <form class="popup__form popup__form_profile" name="profile-form" novalidate>
         <h2 class="popup__title">Редактировать профиль</h2>
         <fieldset class="popup__fieldset">
           <input class="popup__input" name="name" type="text" id="nameInput" placeholder="Имя">
           <input class="popup__input" name="job" type="text" id="jobInput" placeholder="Профессия">
         </fieldset>
-        <button class="popup__save-button" type="submit" title="Сохранить">Сохранить
+        <button class="popup__save-button" type="submit" title="Сохранить">
+          Сохранить
         </button>
       </form>
       <button class="popup__close-button" type="button" title="Закрыть"></button>
     </div>
   </div>
 
+  <div class="popup popup_type_add-card">
+    <div class="popup__container">
+      <form class="popup__form" name="profile-form" novalidate>
+        <h2 class="popup__title">Новое место</h2>
+        <fieldset class="popup__fieldset">
+          <input class="popup__input" id="typePlace" type="text" name="typePlace" autofocus value=""
+            placeholder="Название" minlength="2" maxlength="30" required>
+          <span class="popup__input-error place-name-error"></span>
+          <input class="popup__input" id="typeUrl" type="url" name="typeUrl" value="" placeholder="Ссылка на картинку"
+            required>
+          <span class="popup__input-error place-link-error"></span>
+        </fieldset>
+        <button class="popup__save-button" type="submit" title="Создать">
+          Создать
+        </button>
+      </form>
+      <button class="popup__close-button" type="button" title="Закрыть"></button>
+    </div>
+  </div>
+
+  <div class="popup popup_viewer">
+    <div class="popup__content">
+      <img class="popup__image" src="#" alt="">
+      <h2 class="popup__text"></h2>
+      <button class="popup__close-button" type="button" title="Закрыть"></button>
+    </div>
+  </div>
+
+  <template class="template-card">
+    <figure class="element">
+      <img class="element__image" src="#" alt="">
+      <figcaption class="element__info">
+        <h2 class="element__name"></h2>
+        <button class="element__trash-button" type="button" title="Удалить"></button>
+        <button class="element__like-button" type="button" title="Нравится"></button>
+      </figcaption>
+    </figure>
+  </template>
+
+  <script src="./scripts/cards.js"></script>
   <script src="./scripts/index.js"></script>
 </body>
 
