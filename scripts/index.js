@@ -1,5 +1,5 @@
-const popup = document.querySelectorAll('.popup');
-const popupEditProfile = document.querySelector('.popup_form_edit');
+const popup = document.querySelectorAll(".popup");
+const popupEditProfile = document.querySelector(".popup_form_edit");
 const profileName = document.querySelector(".profile__name");
 const profileJob = document.querySelector(".profile__job");
 const profileForm = document.querySelector(".popup__form_profile");
@@ -10,7 +10,7 @@ const editButton = document.querySelector(".profile__edit-button");
 const imgPopup = document.querySelector(".popup_viewer");
 const titlePopup = imgPopup.querySelector(".popup__text");
 const cardsContainer = document.querySelector(".elements__list");
-const templateCard = document.querySelector(".template-card").content;
+const cardElement = document.querySelector(".template-card").content;
 const popupActiveClass = "popup_opened";
 
 function addCardListeners(card, cardData) {
@@ -27,7 +27,6 @@ function addCardListeners(card, cardData) {
 
 const formAddNewCard = popupAddCard.querySelector(".popup__form");
 formAddNewCard.addEventListener("submit", addCard);
-const cardElement = document.querySelector(".template-card").content;
 
 function createCard(data) {
   const newCard = cardElement.querySelector(".element").cloneNode(true);
@@ -49,8 +48,8 @@ function addTemplateCard(data) {
 
 function addCard(event) {
   event.preventDefault();
-  const cardName = event.target.querySelector("#typePlace").value;
-  const cardLink = event.target.querySelector("#typeUrl").value;
+  const cardName = document.querySelector("#typePlace").value;
+  const cardLink = document.querySelector("#typeUrl").value;
   addTemplateCard({ name: cardName, link: cardLink });
   event.target.reset();
   hidePopup(popupAddCard);
