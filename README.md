@@ -16,12 +16,14 @@ https://alexfinokhin.github.io/Mesto-project/
 3. Добавление новых карточек через форму
 4. Возможность ставить лайк карточке
 5. Возможность удалять карточку
+6. Присутствует валидация форм
 
 ### Roadmap
 - [ ] Добавить возможность редактирования аватарки
 - [x] Добавить возможность редактирования карточек
 - [x] Создание новых карточек
 - [x] Возможность ставить лайки
+- [ ] Добавить бэкэнд:
 - [ ] Реализовать мультиязычность:
     - [ ] Английский
     - [ ] Китайский
@@ -29,6 +31,7 @@ https://alexfinokhin.github.io/Mesto-project/
 Проект сделан по макетам из Figma
 * [Ссылка на макет в Figma](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1)
 * [Ссылка на макет в Figma](https://www.figma.com/file/bjyvbKKJN2naO0ucURl2Z0/JavaScript.-Sprint-5)
+* [Ссылка на макет в Figma](https://www.figma.com/file/kRVLKwYG3d1HGLvh7JFWRT/JavaScript.-Sprint-6?node-id=0%3A1)
 
 
 
