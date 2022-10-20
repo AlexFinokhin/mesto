@@ -1,4 +1,5 @@
-const popupList = document.querySelectorAll(".popup");
+
+const popups = document.querySelectorAll(".popup");
 const popupEditProfile = document.querySelector(".popup_form_edit");
 const popupAddCard = document.querySelector(".popup_type_add-card");
 const typeAddCard = document.querySelector('.popup_type_add-card');
@@ -96,7 +97,7 @@ function fillProfileInputs() {
   showPopup(popupEditProfile);
 }
 
-popupList.forEach((popup) => {
+popups.forEach((popup) => {
   const btnClose = popup.querySelector(".popup__close-button");
   btnClose.addEventListener("click", () => hidePopup(popup));
 });
@@ -128,7 +129,7 @@ profileForm.addEventListener("submit", function (event) {
   hidePopup(popupEditProfile);
 });
 
-popupList.forEach((popup) => {
+popups.forEach((popup) => {
   popup.addEventListener("click", (evt) => {
     if (evt.target.classList.contains(popupActiveClass)) {
       hidePopup(popup);
