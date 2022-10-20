@@ -42,12 +42,16 @@
       <form class="popup__form popup__form_profile" name="profile-form" novalidate>
         <h2 class="popup__title">Редактировать профиль</h2>
         <fieldset class="popup__fieldset">
+          <div class="popup__input-container">
           <input class="popup__input" name="name" autofocus value="Жак-Ив Кусто" type="text" id="nameInput"
             placeholder="Имя" minlength="2" maxlength="200" required>
           <span class="popup__input-error" id="nameInput-error"></span>
+        </div>
+        <div class="popup__input-container">
           <input class="popup__input" name="job" type="text" id="jobInput" placeholder="Профессия" minlength="2"
             maxlength="200" value="Исследователь океана" required>
           <span class="popup__input-error" id="jobInput-error"></span>
+        </div>
         </fieldset>
         <button class="popup__save-button" type="submit" title="Сохранить">
           Сохранить
@@ -62,12 +66,24 @@
       <form class="popup__form" name="profile-form" novalidate>
         <h2 class="popup__title">Новое место</h2>
         <fieldset class="popup__fieldset">
+          
+          <div class="popup__input-container">
+
           <input class="popup__input" id="typePlace" type="text" name="typePlace" autofocus value=""
             placeholder="Название" minlength="2" maxlength="30" required>
           <span class="popup__input-error" id="typePlace-error"></span>
+
+          </div>
+
+         
+          <div class="popup__input-container">
+
           <input class="popup__input" id="typeUrl" type="url" name="typeUrl" value="" placeholder="Ссылка на картинку"
             required>
           <span class="popup__input-error" id="typeUrl-error"></span>
+       
+        </div>
+
         </fieldset>
         <button class="popup__save-button" type="submit" title="Создать">
           Создать
