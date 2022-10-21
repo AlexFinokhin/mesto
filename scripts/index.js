@@ -1,7 +1,7 @@
 const popups = document.querySelectorAll(".popup");
 const popupEditProfile = document.querySelector(".popup_form_edit");
 const popupAddCard = document.querySelector(".popup_type_add-card");
-const typeAddCard = document.querySelector('.popup_type_add-card');
+const typeAddCard = document.querySelector(".popup_type_add-card");
 const profileName = document.querySelector(".profile__name");
 const profileJob = document.querySelector(".profile__job");
 const profileForm = document.querySelector(".popup__form_profile");
@@ -29,6 +29,7 @@ function addCardListeners(card, cardData) {
 }
 
 const formAddNewCard = popupAddCard.querySelector(".popup__form");
+const buttonPlace = formAddNewCard.querySelector(".popup__save-button");
 formAddNewCard.addEventListener("submit", addCard);
 
 function createCard(data) {
@@ -56,6 +57,7 @@ function addCard(event) {
   addTemplateCard({ name: cardName, link: cardLink });
   event.target.reset();
   hidePopup(popupAddCard);
+  buttonPlace.disabled = true;
 }
 
 initialCards.map(addTemplateCard);
@@ -69,6 +71,12 @@ function openPopupCardShow(cardData) {
   showPopup(imgPopup);
 }
 
+profileForm.addEventListener("submit", function (event) {
+  event.preventDefault();
+  fillProfile();
+  hidePopup(popupEditProfile);
+});
+
 function activeLikeBtn(event) {
   const btn = event.target;
   btn.classList.toggle("element__like-button_active");
@@ -78,12 +86,6 @@ function deleteCard(event) {
   const card = event.target.closest(".element");
   card.remove();
 }
-
-profileForm.addEventListener("submit", function (event) {
-  event.preventDefault();
-  fillProfile();
-  hidePopup(popupEditProfile);
-});
 
 function fillProfile() {
   profileName.textContent = profileNameInput.value;
@@ -121,12 +123,6 @@ function closeByEsc(event) {
     hidePopup(popupOpened);
   }
 }
-
-profileForm.addEventListener("submit", function (event) {
-  event.preventDefault();
-  fillProfile();
-  hidePopup(popupEditProfile);
-});
 
 popups.forEach((popup) => {
   popup.addEventListener("click", (evt) => {
