@@ -35,12 +35,9 @@ formAddNewCard.addEventListener("submit", addCard);
 function createCard(data) {
   const newCard = templateCard.querySelector(".element").cloneNode(true);
   const elementImage = newCard.querySelector(".element__image");
-
   elementImage.src = data.link;
   elementImage.alt = data.name;
-
   newCard.querySelector(".element__name").textContent = data.name;
-
   addCardListeners(newCard, data);
   return newCard;
 }
