@@ -52,10 +52,6 @@ const toggleButtonState = (formElement, buttonElement, inactiveButtonClass) => {
   buttonElement.disabled = !isFormValid;
 };
 
-function removeButtonState(buttonElement, inactiveButtonClass) {
-  toggleButtonState(false, buttonElement, inactiveButtonClass);
-}
-
 const setEventListeners = (
   formElement,
   {
@@ -86,9 +82,6 @@ const setEventListeners = (
 const enableValidation = ({ formSelector, ...rest }) => {
   const getFormList = Array.from(document.querySelectorAll(formSelector));
   getFormList.forEach((formElement) => {
-  /** не совсем понимаю, как это можно заменить */  formElement.addEventListener("submit", (evt) => {
-      evt.preventDefault();
-    });
     setEventListeners(formElement, rest);
   });
 };

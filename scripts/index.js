@@ -58,6 +58,7 @@ function addCard(event) {
   event.target.reset();
   hidePopup(popupAddCard);
   buttonPlace.disabled = true;
+  buttonPlace.classList.add('popup__save-button_disabled');
 }
 
 initialCards.map(addTemplateCard);
