@@ -1,9 +1,9 @@
 export class Card {
-  constructor({ name, link }, templateSelector, handleImageClick) {
+  constructor({ name, link }, templateSelector, handleCardClick) {
     this._name = name;
     this._link = link;
     this._templateSelector = templateSelector;
-    this._handleImageClick = handleImageClick;
+    this._handleCardClick = handleCardClick;
   }
 
 
@@ -22,15 +22,15 @@ export class Card {
       });
     }
 
-    if (this._elementDeleteButton) {
-      this._elementDeleteButton.addEventListener("click", () => {
+    if (this._elementTrashButton) {
+      this._elementTrashButton.addEventListener("click", () => {
         this._handleDeleteClick();
       });
     }
 
     if (this._elementImage) {
       this._elementImage.addEventListener("click", () => {
-        this._handleImageClick({ name: this._name, link: this._link });
+        this._handleCardClick({ name: this._name, link: this._link });
       });
     }
   }
@@ -47,15 +47,15 @@ export class Card {
     const elementTemplate = this._getTemplate();
 
     this._elementLikeButton = elementTemplate.querySelector(".element__like-button");
-    this._elementDeleteButton = elementTemplate.querySelector(".element__trash-button");
+    this._elementTrashButton = elementTemplate.querySelector(".element__trash-button");
     this._elementImage = elementTemplate.querySelector(".element__image");
-    this._elementTitle = elementTemplate.querySelector(".element__name");
+    this._elementName = elementTemplate.querySelector(".element__name");
 
     this._setEventListeners();
 
     this._elementImage.src = this._link;
     this._elementImage.alt = this._name;
-    this._elementTitle.textContent = this._name;
+    this._elementName.textContent = this._name;
 
     this._element = elementTemplate;
 
