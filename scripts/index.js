@@ -99,10 +99,7 @@ popups.forEach((popup) => {
   });
 });
 
-const formProfileEditValidation = new FormValidator(
-  configValid,
-  popupEditProfile
-);
+const formProfileEditValidation = new FormValidator(configValid,popupEditProfile);
 formProfileEditValidation.enableValidation();
 
 const formAddCardValidation = new FormValidator(configValid, popupAddCard);
