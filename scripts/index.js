@@ -25,8 +25,7 @@ function addCard(event) {
   addTemplateCard({ name: typePlace.value, link: typeUrl.value });
   event.currentTarget.reset();
   hidePopup(popupAddCard);
-  buttonPlace.disabled = true;
-  buttonPlace.classList.add("popup__save-button_disabled");
+  formAddCardValidation.disableSubmitButton;
 }
 
 function addTemplateCard({ name, link }) {
@@ -35,7 +34,7 @@ function addTemplateCard({ name, link }) {
   cardsList.prepend(cardElement);
 }
 
-initialCards.map(addTemplateCard);
+initialCards.forEach(addTemplateCard);
 
 const imgPopup = document.querySelector(".popup_viewer");
 const elImg = imgPopup.querySelector(".popup__image");
@@ -81,8 +80,16 @@ function hidePopup(popup) {
 }
 
 const addCardButton = document.querySelector(".profile__add-button");
-addCardButton.addEventListener("click", () => showPopup(popupAddCard));
-editButton.addEventListener("click", fillProfileInputs);
+addCardButton.addEventListener("click", () => {
+  showPopup(popupAddCard);
+  formAddNewCard.reset();
+  formAddCardValidation.resetValidation();
+});
+
+editButton.addEventListener("click", () => {
+  fillProfileInputs();
+  formProfileEditValidation.resetValidation();
+});
 
 function closeByEsc(event) {
   if (event.key === "Escape") {
@@ -99,8 +106,10 @@ popups.forEach((popup) => {
   });
 });
 
-const formProfileEditValidation = new FormValidator(configValid,popupEditProfile);
+const formProfileEditValidation = new FormValidator(
+  configValid,
+  popupEditProfile
+);
 formProfileEditValidation.enableValidation();
-
 const formAddCardValidation = new FormValidator(configValid, popupAddCard);
 formAddCardValidation.enableValidation();
