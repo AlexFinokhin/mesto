@@ -32,7 +32,7 @@ cardList.renderItems();
 //________________________________Card________________________________//
 function addTemplateCard({ name, link }) {
   const card = new Card(
-    { name, link, handleCardClick: popupBigImage },
+    { name, link, handleCardClick: openBigImage },
     ".template-card"
   );
 
@@ -45,7 +45,7 @@ function addTemplateCard({ name, link }) {
 const openPopupImage = new PopupWithImage(imgPopup);
 openPopupImage.setEventListeners();
 
-function popupBigImage(name, link) {
+function openBigImage(name, link) {
   openPopupImage.openPopup(name, link);
 }
 
@@ -56,9 +56,9 @@ const userInfo = new UserInfo({
 });
 
 //________________________________PopupWithForm________________________________//
-const addCard = new PopupWithForm(popupAddCard, formAddCard);
+const addCard = new PopupWithForm(popupAddCard, handleCardFormSubmit);
 
-function formAddCard(data) {
+function handleCardFormSubmit(data) {
   const card = addTemplateCard(data);
   cardList.addItem(card);
   addCard.closePopup();
@@ -66,8 +66,8 @@ function formAddCard(data) {
 addCard.setEventListeners();
 
 //________________________________PopupWithForm________________________________//
-const editInfo = new PopupWithForm(popupEditProfile, formEditProfile);
-function formEditProfile(data) {
+const editInfo = new PopupWithForm(popupEditProfile, handleProfileFormSubmit);
+function handleProfileFormSubmit(data) {
   userInfo.setUserInfo(data);
 }
 

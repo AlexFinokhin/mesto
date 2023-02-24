@@ -17,7 +17,7 @@ export class Section {
     this._container.prepend(element);
   }
   renderItems() {
-    this.erase;
+    this.erase();
     this._renderedItems.forEach((item) => {
       this._renderer(item);
     });
