@@ -2,6 +2,7 @@ export const imgPopup = document.querySelector(".popup_viewer");
 export const popupEditProfile = document.querySelector(".popup_form_edit");
 export const elementsList = document.querySelector(".elements__list");
 export const popupAddCard = document.querySelector(".popup_type_add-card");
+
 export const addCardButton = document.querySelector(".profile__add-button");
 export const editButton = document.querySelector(".profile__edit-button");
 

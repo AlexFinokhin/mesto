@@ -11,7 +11,7 @@
 }
 
 .profile__avatar-edit:hover {
-    background: rgba(0, 0, 0, .8);
+    background: rgba(0, 0, 0, .8) url(../../../images/btn-edit-avatar.svg) center / 26px no-repeat;
     outline: 1px solid black;
     opacity: .6;
     cursor: pointer;
