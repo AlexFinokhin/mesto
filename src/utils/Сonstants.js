@@ -6,6 +6,7 @@ export const popupAddCard = document.querySelector(".popup_type_add-card");
 export const addCardButton = document.querySelector(".profile__add-button");
 export const editButton = document.querySelector(".profile__edit-button");
 
+export const popupAddAvatar = document.querySelector(".popup_form_avatar");//9 PR
 
 export const configValid = {
   formSelector: ".popup__form",
@@ -16,6 +17,7 @@ export const configValid = {
   errorClass: "popup__input-error_active",
   };
 
+/*
   export const initialCards = [
     {
       name: 'Барби',
@@ -42,3 +44,4 @@ export const configValid = {
       link: 'https://mobimg.b-cdn.net/v3/fetch/4d/4da8657ada4763a8cc6b86547a98ba76.jpeg'
     }
   ];
+  */
