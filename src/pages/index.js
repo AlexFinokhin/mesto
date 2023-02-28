@@ -25,11 +25,14 @@ import {
   addCardButton,
   editButton,
   popupAddAvatar,
+  buttonAddAvatar,
 
 } from "../utils/Сonstants.js";
 
-let userId;
 
+const popupDelContent = document.querySelector(
+  ".popup_form_confirm"
+);
 
 
 //________________________________API 9999999________________________________//
@@ -63,8 +66,8 @@ const userInfo = new UserInfo({
 //________________________________Section________________________________//
 const cardList = new Section(
   {
-    renderer: (item) => {
-      const cardElement = addTemplateCard(item);
+    renderer: (data) => {
+      const cardElement = addTemplateCard(data);
       cardList.addItem(cardElement);
     },
   },
@@ -73,11 +76,32 @@ const cardList = new Section(
 
 
 //________________________________Card________________________________//
-function addTemplateCard({ name, link }) {
+let userId;
+function addTemplateCard(data) {
   const card = new Card(
-    { name, link, handleCardClick: openBigImage },  
-    ".template-card", userId,
-     () => {
+    data,
+    openBigImage,
+    async () => {
+      try {
+        const res = await api.addLike(data._id);
+        card.like();
+        card.setLikesCount(res);
+      } catch (e) {
+        console.warn(e);
+      }
+    },
+    async () => {
+      try {
+        const res = await api.removeLike(data._id);
+        card.dislike();
+        card.setLikesCount(res);
+      } catch (e) {
+        console.warn(e);
+      }
+    },
+    ".template-card",
+    userId,
+    (card) => {
       popupConfirm.openPopup(card);
     }
   );
@@ -87,14 +111,28 @@ function addTemplateCard({ name, link }) {
   return cardElement;
 }
 
+const popupConfirm = new PopupConfirm(popupDelContent, (card) => {
+  api
+    .deleteCard(card._id)
+    .then(() => {
+      card.remove();
+      popupConfirm.closePopup();
+    })
+    .catch((err) => console.log(err));
+});
+
+popupConfirm.setEventListeners();
+
+
+
+
+
 //________________________________PopupWithImage________________________________//
 const openPopupImage = new PopupWithImage(imgPopup);
-openPopupImage.setEventListeners();
-
 function openBigImage(name, link) {
   openPopupImage.openPopup(name, link);
 }
-
+openPopupImage.setEventListeners();
 
 
 //________________________________PopupWithForm________________________________//
@@ -124,22 +162,11 @@ function handleCardFormSubmit(data) {
 addCard.setEventListeners();
 */
 
-const popupDelContent = document.querySelector(
-  ".popup_form_confirm"
-);
 
 
-const popupConfirm = new PopupConfirm(popupDelContent, async (card) => {
-  api
-    .deleteCard(card._id)
-    .then(() => {
-      card.remove();
-      popupConfirm.closePopup();
-    })
-    .catch((err) => console.log(err));
-});
 
-popupConfirm.setEventListeners();
+
+
 
 
 
@@ -174,10 +201,8 @@ const popupUpdateAvatar = document.querySelector(
 ); //PR 9
 
 
-
-const popupAvatar = new PopupWithForm(
-  popupUpdateAvatar,
-  handleSubmitFormUpdateAvatar); //PR 9
+//________________________________popupAvatar________________________________//
+const popupAvatar = new PopupWithForm(popupUpdateAvatar, handleSubmitFormUpdateAvatar); //PR 9
 
   async function handleSubmitFormUpdateAvatar(data) {
     try {
@@ -191,9 +216,7 @@ const popupAvatar = new PopupWithForm(
 
   popupAvatar.setEventListeners();
 
-  const buttonUpdateAvatar = document.querySelector(
-    ".profile__avatar-edit"
-  );
+//________________________________popupAvatar________________________________//
 
 
 
@@ -215,15 +238,12 @@ editButton.addEventListener(
   false
 );
 
-
 //____________________// PR 9 AVATAR
-buttonUpdateAvatar.addEventListener(
+buttonAddAvatar.addEventListener(
   "click",
   () => {
     popupAvatar.openPopup();
-    formAvatarEditValidation.enableValidation();
-    
-
+    formAvatarEditValidation.resetValidation();
   },
   false
 );

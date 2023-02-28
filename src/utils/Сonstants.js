@@ -7,6 +7,7 @@ export const addCardButton = document.querySelector(".profile__add-button");
 export const editButton = document.querySelector(".profile__edit-button");
 
 export const popupAddAvatar = document.querySelector(".popup_form_avatar");//9 PR
+export const buttonAddAvatar = document.querySelector(".profile__avatar-edit");//9 PR
 
 export const configValid = {
   formSelector: ".popup__form",
