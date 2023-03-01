@@ -28,22 +28,26 @@ export class Card {
       .cloneNode(true);
   }
 
+   _handleLikeClick = () => {
+    if (this._elementLikeButton.classList.contains('element__like-button_active')) {
+      this._removeLike();
+    } else {
+      this._setLike();
+    }
+  };
+
+  _handleTrashClick = () => {
+    this._deleteCard(this._id);
+  };
+
+  _handleImageClick = () => {
+    this._handleCardClick(this._name, this._link);
+  };
+
   _setEventListeners() {
-    this._elementLikeButton.addEventListener("click", () => {
-      if (this._elementLikeButton.classList.contains("element__like-button_active")) {
-        this._removeLike();
-      } else {
-        this._setLike();
-      }
-    });
-
-    this._elementTrashButton.addEventListener("click", () => {
-      this._deleteCard(this._id);
-    });
-
-    this._elementImage.addEventListener("click", () => {
-      this._handleCardClick(this._name, this._link);
-    });
+    this._elementLikeButton.addEventListener('click', this._handleLikeClick);
+    this._elementTrashButton.addEventListener('click', this._handleTrashClick);
+    this._elementImage.addEventListener('click', this._handleImageClick);
   }
   
   _isLiked() {
