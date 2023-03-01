@@ -13,31 +13,10 @@ export class UserInfo {
     };
   }
 
-  
   setUserInfo(data) {
-    if (data.name) this._profileName.textContent = data.name;
-    if (data.about) this._profileJob.textContent = data.about;
-    if (data.avatar) this._avatar.src = data.avatar;
+    this._profileName.textContent = data.name || this._profileName.textContent;
+    this._profileJob.textContent = data.about || this._profileJob.textContent;
+    this._avatar.src = data.avatar || this._avatar.src;
   }
-
-// ПЕРЕДЕЛАТЬ ПОТОМ КАК У СВЯТА
-
-/*
-  setUserInfo({name, job}) {
-    if(name) {
-      this._profileName.textContent = name;
-    }
-    if(job) {
-      this._profileJob.textContent = job;
-    }
-  }
-*/
-
-  /* setUserInfo({ name, job }) {
-    this._profileName.textContent = name;
-    this._profileJob.textContent = job;
-    if (data.name) this._name.textContent = data.name;
-    if (data.job) this._about.textContent = data.job;
-  }
-  */
+  
 }
