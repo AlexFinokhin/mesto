@@ -1,21 +1,14 @@
 import "./index.css";
 
-
-// pr 9
 import { Api } from "../components/Api.js";
-
-
-import { FormValidator } from "../Components/FormValidator.js";
-import { configValid } from "../utils/Сonstants.js";
 import { Card } from "../Components/Card.js";
-import { UserInfo } from "../Components/UserInfo.js";
-import { Section } from "../Components/Section.js";
+import { configValid } from "../utils/Сonstants.js";
+import { FormValidator } from "../Components/FormValidator.js";
 import { PopupWithImage } from "../Components/PopupWithImage.js";
 import { PopupWithForm } from "../Components/PopupWithForm.js";
-
-
-import { PopupConfirm } from "../Components/PopupConfirm.js";
-
+import { PopupWithSubmit } from "../Components/PopupWithSubmit.js";
+import { Section } from "../Components/Section.js";
+import { UserInfo } from "../Components/UserInfo.js";
 
 import {
   imgPopup,
@@ -23,19 +16,14 @@ import {
   elementsList,
   popupAddCard,
   addCardButton,
-  editButton,
+  editProfileButton,
   popupAddAvatar,
-  buttonAddAvatar,
-
+  editAvatarButton,
+  popupDeleteCard,
+  popupEditAvatar,
 } from "../utils/Сonstants.js";
 
-
-const popupDelContent = document.querySelector(
-  ".popup_form_confirm"
-);
-
-
-//________________________________API 9999999________________________________//
+//________________________________API________________________________//
 const api = new Api({
   baseUrl: "https://mesto.nomoreparties.co/v1/cohort-60",
   headers: {
@@ -43,25 +31,14 @@ const api = new Api({
     "Content-Type": "application/json",
   },
 });
-//________________________________API 9999999________________________________//
-
 
 //________________________________UserInfo________________________________//
-
-
 
 const userInfo = new UserInfo({
   profileNameSelector: ".profile__name",
   profileJobSelector: ".profile__job",
   profileAvatarSelector: ".profile__avatar",
 });
-
-
-
-
-
-
-
 
 //________________________________Section________________________________//
 const cardList = new Section(
@@ -74,154 +51,99 @@ const cardList = new Section(
   elementsList
 );
 
-
 //________________________________Card________________________________//
 let userId;
-function addTemplateCard(data) {
+const addTemplateCard = (data) => {
   const card = new Card(
     data,
-    openBigImage,
+    () => openPopupImage.openPopup(data.name, data.link),
     async () => {
       try {
-        const res = await api.addLike(data._id);
-        card.like();
+        const res = await api.putLike(data._id);
+        card.setLike();
         card.setLikesCount(res);
-      } catch (e) {
-        console.warn(e);
+      } catch (err) {
+        console.log(err);
       }
     },
     async () => {
       try {
-        const res = await api.removeLike(data._id);
-        card.dislike();
+        const res = await api.deleteLike(data._id);
+        card.removeLike();
         card.setLikesCount(res);
-      } catch (e) {
-        console.warn(e);
+      } catch (err) {
+        console.log(err);
       }
     },
     ".template-card",
     userId,
-    (card) => {
-      popupConfirm.openPopup(card);
-    }
+    () => deleteCardConfirm.openPopup(card)
   );
 
-  const cardElement = card.generateCard();
+  return card.generateCard();
+};
 
-  return cardElement;
-}
+//________________________________PopupWithSubmit________________________________//
 
-const popupConfirm = new PopupConfirm(popupDelContent, (card) => {
+const deleteCardConfirm = new PopupWithSubmit(popupDeleteCard, (card) => {
   api
     .deleteCard(card._id)
     .then(() => {
       card.remove();
-      popupConfirm.closePopup();
+      deleteCardConfirm.closePopup();
     })
     .catch((err) => console.log(err));
 });
 
-popupConfirm.setEventListeners();
-
-
-
-
+deleteCardConfirm.setEventListeners();
 
 //________________________________PopupWithImage________________________________//
 const openPopupImage = new PopupWithImage(imgPopup);
-function openBigImage(name, link) {
-  openPopupImage.openPopup(name, link);
-}
 openPopupImage.setEventListeners();
 
-
 //________________________________PopupWithForm________________________________//
-const addCard = new PopupWithForm(popupAddCard, handleSubmitFormAddContent);
-
-// Форма добавления карточек
-async function handleSubmitFormAddContent(data) {
+const addCard = new PopupWithForm(popupAddCard, async (data) => {
   try {
     const newCard = await api.addCard(data);
-    cardList.addItem(addTemplateCard(newCard));
+    cardList.addItem(addTemplateCard({ ...newCard }));
     addCard.closePopup();
   } catch (err) {
-    return console.log(err);
+    console.log(err);
   }
-}
+});
 
 addCard.setEventListeners();
-
-/*
-function handleCardFormSubmit(data) {
-  const card = addTemplateCard(data);
-  //addCard.loading(); //PR 9
-  cardList.addItem(card);
-  addCard.closePopup();
-}
-
-addCard.setEventListeners();
-*/
-
-
-
-
-
-
-
-
-
-
-
 
 //________________________________PopupWithForm________________________________//
-const editInfo = new PopupWithForm(popupEditProfile, handleProfileFormSubmit);
-//////////////////////////////////////////////999999999999999
-async function handleProfileFormSubmit(data) {
+const editInfo = new PopupWithForm(popupEditProfile, async (data) => {
   try {
-    const userData = await api.editUserInfo(data);
+    const userData = await api.setUserInfo(data);
     userInfo.setUserInfo(userData);
     editInfo.closePopup();
   } catch (err) {
-    return console.log(err);
+    console.log(err);
   }
-}
+});
+
 editInfo.setEventListeners();
-//////////////////////////////////////////99999999999999999999999
-/*
-function handleProfileFormSubmit(data) {
-  editInfo.loading();//PR 9
-  userInfo.setUserInfo(data);
-}
 
-
-*/
-
-const popupUpdateAvatar = document.querySelector(
-  ".popup_form_avatar"
-); //PR 9
-
-
-//________________________________popupAvatar________________________________//
-const popupAvatar = new PopupWithForm(popupUpdateAvatar, handleSubmitFormUpdateAvatar); //PR 9
-
-  async function handleSubmitFormUpdateAvatar(data) {
-    try {
-      const userData = await api.updateUserAvatar(data);
-      userInfo.setUserInfo(userData);
-      popupAvatar.closePopup();
-    } catch (err) {
-      return console.log(err);
-    }
+//________________________________popupEditAvatar________________________________//
+const editAvatar = new PopupWithForm(popupEditAvatar, async (data) => {
+  try {
+    const userData = await api.setUserAvatar(data);
+    userInfo.setUserInfo(userData);
+    editAvatar.closePopup();
+  } catch (err) {
+    console.log(err);
   }
+});
 
-  popupAvatar.setEventListeners();
+editAvatar.setEventListeners();
 
-//________________________________popupAvatar________________________________//
-
-
-
+//________________________________Buttons________________________________//
 addCardButton.addEventListener(
-  "click", () => {
+  "click",
+  () => {
     addCard.openPopup();
     formAddCardValidation.disableSubmitButton();
     formAddCardValidation.resetValidation();
@@ -229,8 +151,9 @@ addCardButton.addEventListener(
   false
 );
 
-editButton.addEventListener(
-  "click", () => {
+editProfileButton.addEventListener(
+  "click",
+  () => {
     editInfo.openPopup();
     editInfo.setInputsValues(userInfo.getUserInfo());
     formProfileEditValidation.resetValidation();
@@ -238,40 +161,30 @@ editButton.addEventListener(
   false
 );
 
-//____________________// PR 9 AVATAR
-buttonAddAvatar.addEventListener(
+editAvatarButton.addEventListener(
   "click",
   () => {
-    popupAvatar.openPopup();
+    editAvatar.openPopup();
     formAvatarEditValidation.resetValidation();
   },
   false
 );
-//____________________// PR 9 AVATAR
-
-
-
-
-
-
-
-
 
 //________________________________FormValidator________________________________//
-const formProfileEditValidation = new FormValidator(configValid, popupEditProfile);
+const formProfileEditValidation = new FormValidator(
+  configValid,
+  popupEditProfile
+);
 formProfileEditValidation.enableValidation();
 
 const formAddCardValidation = new FormValidator(configValid, popupAddCard);
 formAddCardValidation.enableValidation();
 
-//PR 9 AVATAR
 const formAvatarEditValidation = new FormValidator(configValid, popupAddAvatar);
 formAvatarEditValidation.enableValidation();
 
-
-// Получаем карточки с сервера после того,
-// как получим данные пользователя
-Promise.all([api.getCurrentUserInfo(), api.getInitialCards()])
+//________________________________Promise.all________________________________//
+Promise.all([api.getUserInfo(), api.getInitialCards()])
   .then(([userData, cards]) => {
     userInfo.setUserInfo(userData);
     userId = userData._id;

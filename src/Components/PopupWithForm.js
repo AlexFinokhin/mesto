@@ -5,8 +5,7 @@ export class PopupWithForm extends Popup {
     super(popupSelector);
     this._submitHandler = submitHandler;
     this._popupForm = this._popup.querySelector(".popup__form");
-        this._inputsList = this._popupForm.querySelectorAll(".popup__input");
-
+    this._inputsList = this._popupForm.querySelectorAll(".popup__input");
   }
 
   _getInputValues() {
@@ -17,29 +16,36 @@ export class PopupWithForm extends Popup {
     return inputData;
   }
 
-
-
   setInputsValues(data) {
     this._inputsList.forEach((input) => {
       input.value = data[input.name];
     });
   }
 
+  _setLoading(isLoading) {
+    const submitButton = this._popupForm.querySelector(".popup__save-button");
+    if (isLoading) {
+      submitButton.textContent = "Сохранение...";
+    } else {
+      submitButton.textContent = "Сохранить";
+    }
+  }
+
   setEventListeners() {
     super.setEventListeners();
     this._popupForm.addEventListener("submit", (evt) => {
       evt.preventDefault();
-      const initialText = evt.submitter.textContent;
-      evt.submitter.textContent = "Сохранение...";
+      this._setLoading(true);
       this._submitHandler(this._getInputValues())
-      .then(() => this.closePopup()) // закрывается попап в `then`
+        .then(() => {
+          this.closePopup();
+        })
         .finally(() => {
-          evt.submitter.textContent = initialText;
+          this._setLoading(false);
         });
-      // this.closePopup();
     });
   }
-  
+
   closePopup() {
     super.closePopup();
     this._popupForm.reset();

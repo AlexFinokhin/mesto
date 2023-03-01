@@ -1,13 +1,13 @@
-export const imgPopup = document.querySelector(".popup_viewer");
-export const popupEditProfile = document.querySelector(".popup_form_edit");
-export const elementsList = document.querySelector(".elements__list");
-export const popupAddCard = document.querySelector(".popup_type_add-card");
-
 export const addCardButton = document.querySelector(".profile__add-button");
-export const editButton = document.querySelector(".profile__edit-button");
-
-export const popupAddAvatar = document.querySelector(".popup_form_avatar");//9 PR
-export const buttonAddAvatar = document.querySelector(".profile__avatar-edit");//9 PR
+export const editProfileButton = document.querySelector(".profile__edit-button");
+export const editAvatarButton = document.querySelector(".profile__avatar-edit");
+export const elementsList = document.querySelector(".elements__list");
+export const imgPopup = document.querySelector(".popup_viewer");
+export const popupAddCard = document.querySelector(".popup_type_add-card");
+export const popupDeleteCard = document.querySelector(".popup_form_confirm");
+export const popupAddAvatar = document.querySelector(".popup_form_avatar");
+export const popupEditAvatar = document.querySelector(".popup_form_avatar");
+export const popupEditProfile = document.querySelector(".popup_form_edit");
 
 export const configValid = {
   formSelector: ".popup__form",

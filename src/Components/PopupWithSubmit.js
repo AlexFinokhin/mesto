@@ -1,6 +1,6 @@
 import { Popup } from "./Popup.js";
 
-export class PopupConfirm extends Popup {
+export class PopupWithSubmit extends Popup {
   constructor(popupSelector, submitHandler) {
     super(popupSelector);
     this._submitHandler = submitHandler;
@@ -12,17 +12,11 @@ export class PopupConfirm extends Popup {
     super.openPopup();
   }
 
-  // перезаписывает родительский метод setEventListeners.
   setEventListeners() {
     super.setEventListeners();
     this._popupForm.addEventListener("submit", (evt) => {
-      // Отмена стандартной формы отправки
       evt.preventDefault();
       this._submitHandler(this._card);
     });
   }
-
-  /* close() {
-    super.close();
-  } */
 }

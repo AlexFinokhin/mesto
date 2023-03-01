@@ -7,15 +7,25 @@
     border: none;
     border-radius: 50%;
     background: transparent;
-    transition: opacity 0.2s linear;
-}
-
-.profile__avatar-edit:hover {
+    position: relative;
+    }
+    
+    .profile__avatar-edit::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+    transition: opacity .2s linear;
     background: rgba(0, 0, 0, .8) url(../../../images/btn-edit-avatar.svg) center / 26px no-repeat;
-    outline: 1px solid black;
-    opacity: .6;
+    }
+    
+    .profile__avatar-edit:hover::after {
+    opacity: 1;
     cursor: pointer;
-}
+    }
 
 @media screen and (max-width: 1023px) {
     .profile__avatar-edit {
