@@ -1,6 +1,7 @@
-export const addCardButton = document.querySelector(".profile__add-button");
-export const editProfileButton = document.querySelector(".profile__edit-button");
-export const editAvatarButton = document.querySelector(".profile__avatar-edit");
+export const buttonOpenPopupCard = document.querySelector(".profile__add-button");
+export const buttonEditProfile = document.querySelector(".profile__edit-button");
+export const buttonEditAvatar = document.querySelector(".profile__avatar-edit");
+
 export const elementsList = document.querySelector(".elements__list");
 export const imgPopup = document.querySelector(".popup_viewer");
 export const popupAddCard = document.querySelector(".popup_type_add-card");

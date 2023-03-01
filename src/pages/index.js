@@ -15,10 +15,10 @@ import {
   popupEditProfile,
   elementsList,
   popupAddCard,
-  addCardButton,
-  editProfileButton,
+  buttonOpenPopupCard,
+  buttonEditProfile,
   popupAddAvatar,
-  editAvatarButton,
+  buttonEditAvatar,
   popupDeleteCard,
   popupEditAvatar,
 } from "../utils/Сonstants.js";
@@ -83,23 +83,23 @@ const addTemplateCard = (data) => {
   return card.generateCard();
 };
 
+//________________________________PopupWithImage________________________________//
+const openPopupImage = new PopupWithImage(imgPopup);
+openPopupImage.setEventListeners();
+
 //________________________________PopupWithSubmit________________________________//
 
 const deleteCardConfirm = new PopupWithSubmit(popupDeleteCard, (card) => {
   api
     .deleteCard(card._id)
     .then(() => {
-      card.remove();
+      //card.remove();
       deleteCardConfirm.closePopup();
     })
     .catch((err) => console.log(err));
 });
 
 deleteCardConfirm.setEventListeners();
-
-//________________________________PopupWithImage________________________________//
-const openPopupImage = new PopupWithImage(imgPopup);
-openPopupImage.setEventListeners();
 
 //________________________________PopupWithForm________________________________//
 const addCard = new PopupWithForm(popupAddCard, async (data) => {
@@ -109,6 +109,8 @@ const addCard = new PopupWithForm(popupAddCard, async (data) => {
     addCard.closePopup();
   } catch (err) {
     console.log(err);
+  } finally {
+    addCard.stopLoading(false);
   }
 });
 
@@ -122,6 +124,8 @@ const editInfo = new PopupWithForm(popupEditProfile, async (data) => {
     editInfo.closePopup();
   } catch (err) {
     console.log(err);
+  } finally {
+    editInfo.stopLoading(false);
   }
 });
 
@@ -135,13 +139,15 @@ const editAvatar = new PopupWithForm(popupEditAvatar, async (data) => {
     editAvatar.closePopup();
   } catch (err) {
     console.log(err);
+  } finally {
+    editAvatar.stopLoading(false);
   }
 });
 
 editAvatar.setEventListeners();
 
 //________________________________Buttons________________________________//
-addCardButton.addEventListener(
+buttonOpenPopupCard.addEventListener(
   "click",
   () => {
     addCard.openPopup();
@@ -151,7 +157,7 @@ addCardButton.addEventListener(
   false
 );
 
-editProfileButton.addEventListener(
+buttonEditProfile.addEventListener(
   "click",
   () => {
     editInfo.openPopup();
@@ -161,7 +167,7 @@ editProfileButton.addEventListener(
   false
 );
 
-editAvatarButton.addEventListener(
+buttonEditAvatar.addEventListener(
   "click",
   () => {
     editAvatar.openPopup();
