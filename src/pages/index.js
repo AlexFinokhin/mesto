@@ -93,7 +93,7 @@ const deleteCardConfirm = new PopupWithSubmit(popupDeleteCard, (card) => {
   api
     .deleteCard(card._id)
     .then(() => {
-      //card.remove();
+      card.remove();
       deleteCardConfirm.closePopup();
     })
     .catch((err) => console.log(err));
