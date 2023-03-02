@@ -101,7 +101,6 @@ const deleteCardConfirm = new PopupWithSubmit(popupDeleteCard, async (card) => {
 
 deleteCardConfirm.setEventListeners();
 
-
 //________________________________PopupWithForm________________________________//
 const addCard = new PopupWithForm(popupAddCard, async (data) => {
   try {

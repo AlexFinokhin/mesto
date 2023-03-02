@@ -28,8 +28,10 @@ export class Card {
       .cloneNode(true);
   }
 
-   _handleLikeClick = () => {
-    if (this._elementLikeButton.classList.contains('element__like-button_active')) {
+  _handleLikeClick = () => {
+    if (
+      this._elementLikeButton.classList.contains("element__like-button_active")
+    ) {
       this._removeLike();
     } else {
       this._setLike();
@@ -45,11 +47,11 @@ export class Card {
   };
 
   _setEventListeners() {
-    this._elementLikeButton.addEventListener('click', this._handleLikeClick);
-    this._elementTrashButton.addEventListener('click', this._handleTrashClick);
-    this._elementImage.addEventListener('click', this._handleImageClick);
+    this._elementLikeButton.addEventListener("click", this._handleLikeClick);
+    this._elementTrashButton.addEventListener("click", this._handleTrashClick);
+    this._elementImage.addEventListener("click", this._handleImageClick);
   }
-  
+
   _isLiked() {
     this._likes.forEach((user) => {
       if (user._id === this._userId) {
@@ -72,7 +74,6 @@ export class Card {
     this._elementLikeButton.classList.remove("element__like-button_active");
   }
 
-  
   deleteCard() {
     this._element.remove();
     this._element = null;
@@ -81,8 +82,12 @@ export class Card {
   generateCard() {
     const elementTemplate = this._getTemplate();
 
-    this._elementLikeButton = elementTemplate.querySelector(".element__like-button");
-    this._elementLikesQuantity = elementTemplate.querySelector(".element__like-count");
+    this._elementLikeButton = elementTemplate.querySelector(
+      ".element__like-button"
+    );
+    this._elementLikesQuantity = elementTemplate.querySelector(
+      ".element__like-count"
+    );
     this._elementLikesQuantity.textContent = this._likes.length;
 
     this._elementTrashButton = elementTemplate.querySelector(
