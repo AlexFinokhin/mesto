@@ -12,10 +12,6 @@ export class PopupWithSubmit extends Popup {
     super.openPopup();
   }
 
-  setDeleteCard(card = null) {
-    this._card = card;
-  }
-
   setEventListeners() {
     super.setEventListeners();
     this._popupForm.addEventListener("submit", (evt) => {
