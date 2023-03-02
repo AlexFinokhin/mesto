@@ -89,17 +89,18 @@ openPopupImage.setEventListeners();
 
 //________________________________PopupWithSubmit________________________________//
 
-const deleteCardConfirm = new PopupWithSubmit(popupDeleteCard, (card) => {
-  api
-    .deleteCard(card._id)
-    .then(() => {
-      card.remove();
-      deleteCardConfirm.closePopup();
-    })
-    .catch((err) => console.log(err));
+const deleteCardConfirm = new PopupWithSubmit(popupDeleteCard, async (card) => {
+  try {
+    await api.deleteCard(card._id);
+    card.deleteCard();
+    deleteCardConfirm.closePopup();
+  } catch (err) {
+    console.log(err);
+  }
 });
 
 deleteCardConfirm.setEventListeners();
+
 
 //________________________________PopupWithForm________________________________//
 const addCard = new PopupWithForm(popupAddCard, async (data) => {
