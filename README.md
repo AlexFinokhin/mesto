@@ -29,4 +29,5 @@
 
 ***
 [Открыть сайт в браузере](https://alexfinokhin.github.io/Mesto-project/)\
-[Ссылка на макет в Figma](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1)
+[Ссылка на макет в Figma](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1)\
+[Ссылка на макет в Figma 2](https://www.figma.com/file/PSdQFRHoxXJFs2FH8IXViF/JavaScript.-Sprint-9?type=design&node-id=0-1&mode=design&t=RsWA3WSJtlAPvEhN-0)
